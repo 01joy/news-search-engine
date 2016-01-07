@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>News Search Engine</title>
+    <style type="text/css">
+        div#doc {width:800px}
+    .pagination-page-info {
+        padding: .6em;
+        padding-left: 0;
+        width: 40em;
+        margin: .5em;
+        margin-left: 0;
+        font-size: 12px;
+    }
+    .pagination-page-info b {
+        color: black;
+        background: #6aa6ed;
+        padding-left: 2px;
+        padding: .1em .25em;
+        font-size: 150%;
+    }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>News Search Engine</h1>
+            <form name="search" action="/search/" method="POST">
+                <p>
+                    {% if key %}
+                        <input type="text" name="key_word" value="{{key}}">
+                    {% else %}
+                        <input type="text" name="key_word">
+                    {% endif %}
+                    <input type="submit" value="Search">
+                </p>
+            </form>
+        </div>
+        <hr/>
+        {% block high_search%}
+        {% endblock %}
+        {% if error%}
+            {% for doc in docs%}
+            <div id="doc">
+                <ul id="navigation">
+                    <p><big><a href="/search/{{doc.id}}/" target="_blank">{{doc.title}}</a></big></p>
+                    <p>{{doc.time}}<br/>{{doc.snippet}}<br/>
+                    <a href="{{ doc.url }}" target="_blank">{{doc.url}}</a>
+                    </p>
+                </ul>
+            </div>
+            <br/>
+            {% endfor %}
+        {% block next %}
+        <ul>
+            {% for i in page %}
+                <a href="/search/page/{{i}}/">{{i}}</a>&nbsp;
+            {% endfor %}
+        </ul>
+        {% endblock %}
+        {% else %}
+            <p>对不起，没有您搜索的网页！</p>
+        {% endif %}
+		
+		<div id="footer">
+			<hr>
+            &copy; 2015 UCAS 陈镇霖 肖俊斌 罗纯龙 方文征
+        </div>
+		
+    </div>
+</body>
+</html>
