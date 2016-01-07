@@ -71,6 +71,6 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('../config.ini', 'utf-8')
     root = 'http://news.sohu.com/1/0903/61/subject212846158'
-    news_pool = get_news_pool(root, 851, 848)
+    news_pool = get_news_pool(root, 854, 849)
     crawl_news(news_pool, 140, config['DEFAULT']['doc_dir_path'], config['DEFAULT']['doc_encoding'])
     print('done!')
