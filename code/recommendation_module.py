@@ -2,7 +2,7 @@
 """
 Created on Wed Dec 23 14:06:10 2015
 
-@author: czl
+@author: bitjoy.net
 """
 
 from os import listdir
@@ -13,7 +13,6 @@ import sqlite3
 import configparser
 from datetime import *
 import math
-import re
 
 import pandas as pd
 import numpy as np
@@ -147,46 +146,17 @@ class RecommendationModule:
         for word, df in idf.items():
             idf_file.write('%s %.9f\n'%(word, math.log(n / df)))
         idf_file.close()
-    
-    def natural_sort(self, l): 
-        convert = lambda text: int(text) if text.isdigit() else text.lower() 
-        alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ] 
-        return sorted(l, key = alphanum_key)
-    
-    def partition_files(self, n_partitions):
-        files = listdir(self.doc_dir_path)
-        files = self.natural_sort(files)
-        n = float(len(files))
-        partitions = []
-        sz = int(n / n_partitions)
-        x = 0
-        for i in range(n_partitions - 1):
-            partitions.append(files[x: x + sz])
-            x += sz
-        partitions.append(files[x:])
-        return partitions
         
-    def find_k_nearest(self, k, topK, n_partitions):
-        
-        print('-----start gen_idf_file time: %s-----'%(datetime.today()))
+    def find_k_nearest(self, k, topK):
         self.gen_idf_file()
-        
-        partitions = self.partition_files(n_partitions)
-        i = 1
-        for p in partitions:
-            print('-----start %d construct_dt_matrix time: %s-----'%(i, datetime.today()))
-            dt_matrix = self.construct_dt_matrix(p, topK)
-            
-            print('-----start %d construct_k_nearest_matrix time: %s-----'%(i, datetime.today()))
-            self.construct_k_nearest_matrix(dt_matrix, k)
-            i += 1
-      
-        print('-----start write_k_nearest_matrix_to_db time: %s-----'%(datetime.today()))
+        files = listdir(self.doc_dir_path)
+        dt_matrix = self.construct_dt_matrix(files, topK)
+        self.construct_k_nearest_matrix(dt_matrix, k)
         self.write_k_nearest_matrix_to_db()
         
 if __name__ == "__main__":
     print('-----start time: %s-----'%(datetime.today()))
     rm = RecommendationModule('../config.ini', 'utf-8')
-    rm.find_k_nearest(5, 25, 10)
+    rm.find_k_nearest(5, 25)
     print('-----finish time: %s-----'%(datetime.today()))
     

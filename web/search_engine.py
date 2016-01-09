@@ -164,5 +164,5 @@ class SearchEngine:
 
 if __name__ == "__main__":
     se = SearchEngine('../config.ini', 'utf-8')
-    flag, rs = se.search('朝鲜氢弹试验', 0)
+    flag, rs = se.search('北京雾霾', 0)
     print(rs[:10])
