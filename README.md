@@ -2,10 +2,13 @@
 <img src="./News Search Engine3.png" width = "650" align=center />
 
 #使用方法
-1. 安装jieba分词组件，命令为easy_install jieba
-2. 安装Flask Web框架，命令为pip install Flask
-3. 进入web文件夹，运行main.py文件
-4. 打开浏览器，访问http://127.0.0.1:5000/ 输入关键词开始测试
+1. 安装python 3.4+环境
+2. 安装jieba分词组件，命令为easy_install jieba
+3. 安装Flask Web框架，命令为pip install Flask
+4. 进入web文件夹，运行main.py文件
+5. 打开浏览器，访问http://127.0.0.1:5000/ 输入关键词开始测试
+
+如果想抓取最新新闻数据并构建索引，一键运行`./code/setup.py`，再按上面的方法测试。
 
 #项目介绍
 1. [和我一起构建搜索引擎（一）简介](http://bitjoy.net/2016/01/04/introduction-to-building-a-search-engine-1/)
