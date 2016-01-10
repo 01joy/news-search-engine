@@ -1,5 +1,5 @@
 #新闻搜索引擎
-<img src="./News Search Engine3.png" width = "650" align=center />
+<img src="./news_search_engine3.png" width = "650" align=center />
 
 #使用方法
 1. 安装python 3.4+环境
