@@ -24,7 +24,7 @@ def get_news_pool(root, start, end):
             print("-----%s: %s-----"%(type(e), page_url))
             continue
         html = response.read()
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html,"lxml") # http://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/
         td = soup.find('td', class_ = "newsblue1")
         a = td.find_all('a')
         span = td.find_all('span')
@@ -46,7 +46,7 @@ def crawl_news(news_pool, min_body_len, doc_dir_path, doc_encoding):
             print("-----%s: %s-----"%(type(e), news[1]))
             continue
         html = response.read()
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html,"lxml") # http://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/
         try:
             body = soup.find('div', class_ = "text clear").find('div').get_text()
         except Exception as e:
