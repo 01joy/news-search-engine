@@ -3,9 +3,9 @@
 
 # 使用方法
 1. 安装python 3.4+环境
-2. 安装lxml html解析器，命令为easy_install lxml
-3. 安装jieba分词组件，命令为easy_install jieba
-4. 安装Flask Web框架，命令为pip install Flask
+2. 安装lxml html解析器，命令为`pip install lxml`
+3. 安装jieba分词组件，命令为`pip install jieba`
+4. 安装Flask Web框架，命令为`pip install Flask`
 5. 进入web文件夹，运行main.py文件
 6. 打开浏览器，访问http://127.0.0.1:5000/ 输入关键词开始测试
 
