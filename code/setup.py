@@ -34,7 +34,7 @@ def crawling():
 if __name__ == "__main__":
     print('-----start time: %s-----'%(datetime.today()))
     
-    #抓取新闻数据
+    #抓取新闻数据 #20200404，可替换为spider.chinanews.com.py抓取新闻 
     crawling()
     
     #构建索引
