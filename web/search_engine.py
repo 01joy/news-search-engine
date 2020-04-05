@@ -23,6 +23,9 @@ class SearchEngine:
     N = 0
     AVG_L = 0
     
+    HOT_K1 = 0
+    HOT_K2 = 0
+    
     conn = None
     
     def __init__(self, config_path, config_encoding):
@@ -38,6 +41,8 @@ class SearchEngine:
         self.B = float(config['DEFAULT']['b'])
         self.N = int(config['DEFAULT']['n'])
         self.AVG_L = float(config['DEFAULT']['avg_l'])
+        self.HOT_K1 = float(config['DEFAULT']['hot_k1'])
+        self.HOT_K2 = float(config['DEFAULT']['hot_k2'])
         
 
     def __del__(self):
@@ -50,6 +55,9 @@ class SearchEngine:
         except ValueError:
             return False
             
+    def sigmoid(self, x):
+        return 1 / (1 + math.exp(-x))
+
     def clean_list(self, seg_list):
         cleaned_dict = {}
         n = 0
@@ -142,7 +150,8 @@ class SearchEngine:
                 td = now_datetime - news_datetime
                 BM25_score = (self.K1 * tf * w) / (tf + self.K1 * (1 - self.B + self.B * ld / self.AVG_L))
                 td = (timedelta.total_seconds(td) / 3600) # hour
-                hot_score = math.log(BM25_score) + 1 / td
+#                hot_score = math.log(BM25_score) + 1 / td
+                hot_score = self.HOT_K1 * self.sigmoid(BM25_score) + self.HOT_K2 / td
                 if docid in hot_scores:
                     hot_scores[docid] = hot_scores[docid] + hot_score
                 else:
