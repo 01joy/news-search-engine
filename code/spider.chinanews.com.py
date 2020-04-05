@@ -151,7 +151,7 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('../config.ini', 'utf-8')
     
-    delta = timedelta(days=-30)
+    delta = timedelta(days=-5)
     end_date = date.today()
     start_date = end_date + delta
     news_pool = get_news_pool(start_date, end_date)
