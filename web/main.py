@@ -1,4 +1,4 @@
-#!congding = utf-8
+# -*- coding: utf-8 -*-
 __author__ = 'lcl'
 
 from flask import Flask, render_template, request
@@ -152,4 +152,5 @@ def get_k_nearest(db_path, docid, k=5):
 
 if __name__ == '__main__':
     jieba.initialize()  # 手动初始化（可选）
+    #app.run(host="0.0.0.0", port=5000) # 部署到服务器上，外网可通过服务器IP和端口访问
     app.run()
